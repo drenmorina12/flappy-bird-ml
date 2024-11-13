@@ -54,3 +54,31 @@ class Bird:
         else:
             if self.tilt > -90:
                 self.tilt -= self.ROT_VEL
+
+    def draw(self, win):
+        self.img_count += 1
+
+        if self.img_count < self.ANIMATION_TIME:
+            self.image = self.IMGS[0]
+        elif self.img_count < self.ANIMATION_TIME * 2:
+            self.image = self.IMGS[1]
+        elif self.img_count < self.ANIMATION_TIME * 3:
+            self.image = self.IMGS[2]
+        elif self.img_count < self.ANIMATION_TIME * 4:
+            self.image = self.IMGS[1]
+        elif self.img_count == self.ANIMATION_TIME * 4 + 1:
+            self.image = self.IMGS[0]
+            self.img_count = 0
+
+        if self.tilt <= -80:
+            self.image = self.IMGS[1]
+            self.img_count = self.ANIMATION_TIME * 2
+
+        rotated_image = pygame.transform.rotate(self.image, self.tilt)
+        new_rect = rotated_image.get_rect(center=self.image.get_rect(topleft=(self.x, self.y)).center)
+        # Rotates image from the center insted of top left
+
+        win.blit(rotated_image, new_rect.topleft)
+
+    def get_mask(self):
+        return pygame.mask.from_surface(self.image)
