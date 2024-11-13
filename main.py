@@ -4,7 +4,7 @@ import os
 import time
 import random
 
-WIN_WIDTH = 600
+WIN_WIDTH = 500
 WIN_HEIGHT = 800
 
 BIRD_IMGS = [pygame.transform.scale2x(pygame.image.load(os.path.join("imgs", "bird1.png"))),
@@ -13,6 +13,7 @@ BIRD_IMGS = [pygame.transform.scale2x(pygame.image.load(os.path.join("imgs", "bi
 PIPE_IMG = pygame.transform.scale2x(pygame.image.load(os.path.join("imgs", "pipe.png")))
 BASE_IMG = pygame.transform.scale2x(pygame.image.load(os.path.join("imgs", "base.png")))
 BG_IMG = pygame.transform.scale2x(pygame.image.load(os.path.join("imgs", "bg.png")))
+
 
 class Bird:
     IMGS = BIRD_IMGS
@@ -41,7 +42,7 @@ class Bird:
         displacement = self.vel * self.tick_count + 1.5 * self.tick_count ** 2
 
         if displacement >= 16:
-            d = 16
+            displacement = 16
 
         if displacement < 0:
             displacement -= 2
@@ -82,3 +83,31 @@ class Bird:
 
     def get_mask(self):
         return pygame.mask.from_surface(self.image)
+
+
+def draw_window(window, bird):
+    window.blit(BG_IMG, (0, 0))
+    bird.draw(window)
+    pygame.display.update()
+
+
+def main():
+    bird = Bird(200, 200)
+    window = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
+    clock = pygame.time.Clock()
+
+    run = True
+    while run:
+        clock.tick(30)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+
+        # bird.move()
+        draw_window(window, bird)
+
+    pygame.quit()
+    quit()
+
+
+main()
