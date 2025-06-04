@@ -35,7 +35,7 @@ class Bird:
         self.image = self.IMGS[0]
 
     def jump(self):
-        self.vel = - 10.5
+        self.vel = - 12
         self.tick_count = 0
         self.height = self.y
 
@@ -239,7 +239,7 @@ def main(genomes, config):
                     nets.pop(x)
                     ge.pop(x)
 
-                if not pipe.passed and pipe.x < bird.x:
+                if not pipe.passed and pipe.x + 100 < bird.x:
                     pipe.passed = True
                     add_pipe = True
 
@@ -264,7 +264,7 @@ def main(genomes, config):
                 ge.pop(x)
 
         if score > 20:
-            break
+            pass
 
         base.move()
         draw_window(win, birds, pipes, base, score, GEN)
