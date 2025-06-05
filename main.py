@@ -6,7 +6,8 @@ import time
 import random
 pygame.font.init()
 
-MODE = "ai"  # Change to "ai" to let the AI play
+MODE = "ai"       # Let the AI play the game
+# MODE = "human"  # Uncomment to play yourself
 
 WIN_WIDTH = 500
 WIN_HEIGHT = 800
@@ -26,6 +27,7 @@ class Bird:
     MAX_ROTATION = 25
     ROT_VEL = 20
     ANIMATION_TIME = 5
+    JUMP_VEL = -10.5
 
     def __init__(self, x, y):
         self.x = x
@@ -38,7 +40,7 @@ class Bird:
         self.image = self.IMGS[0]
 
     def jump(self):
-        self.vel = -10.5
+        self.vel = self.JUMP_VEL
         self.tick_count = 0
         self.height = self.y
 
