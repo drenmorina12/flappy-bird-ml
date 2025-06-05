@@ -89,7 +89,7 @@ Tweak NEAT configurations inside `config-feedforward.txt` (e.g., population size
 
 ## 📷 Screenshots
 
-![Screenshot](imgs/screenshot.png)
+<img src="imgs/screenshot.png" alt="Screenshot" width="250"/>
 
 ---
 
